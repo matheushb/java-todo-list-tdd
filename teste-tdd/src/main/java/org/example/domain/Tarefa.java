@@ -1,23 +1,52 @@
 package org.example.domain;
 
 import org.example.domain.enums.StatusTarefa;
+
 public class Tarefa {
 
-    private final Long id;
+    private static int count = 0;
+    private Integer id;
     private String nome;
     private String descricao;
     private StatusTarefa status;
 
-    public Tarefa(long id, String nome, String descricao, StatusTarefa status) {
+    public Tarefa(String nome, String descricao, StatusTarefa status) {
+        this.descricao = descricao;
+        this.nome = nome;
+        this.status = status;
+        id = count++;
+    }
+
+    public Tarefa(Integer id, String nome, String descricao, StatusTarefa status) {
         this.descricao = descricao;
         this.nome = nome;
         this.status = status;
         this.id = id;
     }
 
+    public Tarefa(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
+    public Tarefa(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Tarefa(String descricao, StatusTarefa status) {
+        this.status = status;
+        this.descricao = descricao;
+    }
+
+    public Tarefa(StatusTarefa status) {
+        this.status = status;
+    }
+
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -38,7 +67,7 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 }
