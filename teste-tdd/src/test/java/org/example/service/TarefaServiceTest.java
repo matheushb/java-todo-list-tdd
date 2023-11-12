@@ -15,9 +15,9 @@ public class TarefaServiceTest {
     TarefaService tarefaService = new TarefaService(tarefaRepository);
 
     @Test
-    public void testeCreateTarefa() {
-        tarefaService.create(new Tarefa(1, "Tarefa 1", "Descricao 1", StatusTarefa.FAZER));
-        tarefaService.create(new Tarefa(2, "Tarefa 2", "Descricao 2", StatusTarefa.FAZER));
+    public void testeCreateTarefa() throws Exception {
+        tarefaService.create(new Tarefa("Tarefa 1", "Descricao 1", StatusTarefa.FAZER));
+        tarefaService.create(new Tarefa("Tarefa 2", "Descricao 2", StatusTarefa.FAZER));
     }
 
     @Test
@@ -34,22 +34,29 @@ public class TarefaServiceTest {
 
     @Test
     public void testeCompleteTarefa() {
-        tarefaService.update(1L, "status", "FAZER");
-        Tarefa tarefa = tarefaService.findOne(1L);
+        Tarefa tarefaUpdate = new Tarefa("Descricao Update");
+
+        tarefaService.update(1, tarefaUpdate);
+        Tarefa tarefa = tarefaService.findOne(1);
         Assertions.assertEquals(tarefa.getStatus(), StatusTarefa.FAZER);
     }
 
     @Test
     public void testeUpdateTarefa() {
-        tarefaService.update(1L, "nome", "Tarefa Update");
-        tarefaService.update(1L, "descricao", "Descricao Update");
-        Tarefa tarefa = tarefaService.findOne(1L);
+        Tarefa tarefaUpdate1 = new Tarefa(StatusTarefa.FAZER);
+        Tarefa tarefaUpdate2 = new Tarefa("nome", "descricao");
+
+
+
+        tarefaService.update(1, tarefaUpdate1);
+        tarefaService.update(1, tarefaUpdate2);
+        Tarefa tarefa = tarefaService.findOne(1);
         Assertions.assertEquals(tarefa.getNome(), "Tarefa Update");
         Assertions.assertEquals(tarefa.getDescricao(), "Descricao Update");
     }
 
     @Test
     public void testeDeleteTarefa() {
-        tarefaService.delete(1L);
+        Assertions.assertTrue(tarefaService.delete(1));
     }
 }
