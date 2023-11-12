@@ -7,23 +7,30 @@ import java.util.List;
 
 public class TarefaService {
 
-    TarefaRepository tarefaRepository;
+    private final TarefaRepository tarefaRepository;
+
     public TarefaService(TarefaRepository tarefaRepository) {
+        this.tarefaRepository = tarefaRepository;
     }
 
-    public void create(Tarefa tarefa) {
-
+    public boolean create(Tarefa tarefa)throws Exception {
+        if(tarefa == null) return false;
+        tarefaRepository.create(tarefa);
     }
 
     public List<Tarefa> find() {
+        return tarefaRepository.find();
     }
 
-    public Tarefa findOne(Long id) {
+    public Tarefa findOne(Integer id) {
+        return tarefaRepository.findOne(id);
     }
 
-    public void update(Long id, String property, String change) {
+    public void update(Integer id, Tarefa tarefa) {
+        tarefaRepository.update(id, tarefa);
     }
 
-    public void delete(long l) {
+    public boolean delete(Integer id) {
+        return tarefaRepository.delete(id);
     }
 }
