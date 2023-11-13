@@ -19,7 +19,6 @@ public class TarefaRepositoryTest {
     public void setUp() {
         List<Tarefa> tarefaList = new ArrayList<>(Arrays.asList(new Tarefa(0, "Tarefa ja na lista", "Descricao ja na lista", StatusTarefa.FAZENDO)));
         tarefaRepository = new TarefaRepository(tarefaList);
-
     }
 
     @Test
@@ -41,23 +40,23 @@ public class TarefaRepositoryTest {
 
     @Test
     public void testeCompleteTarefa() {
-        Tarefa tarefaUpdate = new Tarefa(StatusTarefa.FEITO);
+        Tarefa tarefaUpdate = new Tarefa(0,"Tarefa 1", "Descricao 1", StatusTarefa.FEITO);
 
         tarefaRepository.update(0, tarefaUpdate);
 
         Tarefa tarefa = tarefaRepository.findOne(0);
 
-        Assertions.assertEquals(tarefa.getStatus(), StatusTarefa.FEITO);
+        Assertions.assertEquals(StatusTarefa.FEITO, tarefa.getStatus());
     }
 
     @Test
     public void testeUpdateTarefa() {
 
-        Tarefa tarefaUpdate = new Tarefa("Tarefa Update");
-        Tarefa tarefaUpdate2 = new Tarefa(StatusTarefa.FAZER);
+        Tarefa tarefaUpdate = new Tarefa(0, "Tarefa Name Update", "Tarefa Update", StatusTarefa.FAZER);
+
         List<Tarefa> tarefas = tarefaRepository.find();
+
         tarefaRepository.update(tarefas.get(0).getId(), tarefaUpdate);
-        tarefaRepository.update(tarefas.get(0).getId(), tarefaUpdate2 );
 
         Tarefa tarefa = tarefaRepository.findOne(tarefas.get(0).getId());
 

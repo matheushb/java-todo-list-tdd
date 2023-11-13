@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TarefaTest {
-    Tarefa tarefa = new Tarefa("Tarefa 1", "Descricao 1", StatusTarefa.FAZER);
-    Tarefa newTarefa = new Tarefa("Tarefa 2", "Descricao", StatusTarefa.FAZENDO);
+    Tarefa tarefa = new Tarefa( "Tarefa 1", "Descricao 1", StatusTarefa.FAZER);
+    Tarefa newTarefa = new Tarefa( "Tarefa 2", "Descricao", StatusTarefa.FAZENDO);
     Tarefa tarefa2 = new Tarefa("SÓ DESCRICAO");
     Tarefa tarefa3 = new Tarefa(StatusTarefa.FAZENDO);
     Tarefa tarefa4 = new Tarefa("Descricao", StatusTarefa.FAZER);
@@ -26,14 +26,12 @@ public class TarefaTest {
     public void testeAutoIncrement() {
         Assertions.assertEquals(0, tarefa.getId());
         Assertions.assertEquals(1, newTarefa.getId());
-
     }
 
     @Test
     public void testeGettersTarefa() {
         Assertions.assertEquals(tarefa.getNome(), "Tarefa 1");
         Assertions.assertEquals(tarefa.getDescricao(), "Descricao 1");
-        Assertions.assertEquals(0, tarefa.getId());
         Assertions.assertEquals(tarefa.getStatus(), StatusTarefa.FAZER);
     }
 
