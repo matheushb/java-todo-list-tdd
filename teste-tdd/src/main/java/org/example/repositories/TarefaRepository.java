@@ -12,35 +12,25 @@ public class TarefaRepository {
         this.tarefaList = tarefaList;
     }
 
-    public boolean create(Tarefa tarefa) throws Exception {
+    public boolean create(Tarefa createTarefaDto) throws Exception {
         try{
-            tarefaList.add(tarefa);
+            tarefaList.add(createTarefaDto);
         }catch(Exception err) {
             return false;
         }
         return true;
     }
 
-    public Tarefa update(Integer id, Tarefa tarefa) {
+    public Tarefa update(Integer id, Tarefa tarefaToUpdate) {
 
-        Tarefa tarefaToUpdate = findOne(id);
+        Tarefa tarefa = findOne(id);
 
-        if(tarefaToUpdate == null) return null;
+        Integer tarefaIndex = tarefaList.indexOf(tarefa);
 
-        int tarefaIndex = tarefaList.indexOf(tarefaToUpdate);
-
-        if(tarefa.getNome() != null) {
-            tarefaToUpdate.setNome(tarefa.getNome());
-        }
-        if(tarefa.getStatus() != null) {
-            tarefaToUpdate.setStatus(tarefa.getStatus());
-        }
-
-        if(tarefa.getDescricao() != null) {
-            tarefaToUpdate.setDescricao(tarefa.getDescricao());
-        }
+        if(tarefaIndex.equals(-1)) return null;
 
         tarefaList.set(tarefaIndex, tarefaToUpdate);
+
         return tarefaToUpdate;
     }
 
